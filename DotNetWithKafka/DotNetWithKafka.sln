@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetWithKafka.Api", "DotNetWithKafka.Api\DotNetWithKafka.Api.csproj", "{0033511C-19AA-4A03-B0EF-844580F1C562}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetWithKafka.Domain", "DotNetWithKafka.Domain\DotNetWithKafka.Domain.csproj", "{121A2E10-2C37-43F7-9819-89CA52B4AA91}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetWithKafka.Infrastructure", "DotNetWithKafka.Infrastructure\DotNetWithKafka.Infrastructure.csproj", "{163E8816-3D92-4041-B3A2-2756430B7C8B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetWithKafka.Application", "DotNetWithKafka.Application\DotNetWithKafka.Application.csproj", "{0888A0BA-97BB-4E14-8F0F-3DDD9478FF72}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0033511C-19AA-4A03-B0EF-844580F1C562}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0033511C-19AA-4A03-B0EF-844580F1C562}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0033511C-19AA-4A03-B0EF-844580F1C562}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0033511C-19AA-4A03-B0EF-844580F1C562}.Release|Any CPU.Build.0 = Release|Any CPU
+		{121A2E10-2C37-43F7-9819-89CA52B4AA91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{121A2E10-2C37-43F7-9819-89CA52B4AA91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{121A2E10-2C37-43F7-9819-89CA52B4AA91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{121A2E10-2C37-43F7-9819-89CA52B4AA91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{163E8816-3D92-4041-B3A2-2756430B7C8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{163E8816-3D92-4041-B3A2-2756430B7C8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{163E8816-3D92-4041-B3A2-2756430B7C8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{163E8816-3D92-4041-B3A2-2756430B7C8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0888A0BA-97BB-4E14-8F0F-3DDD9478FF72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0888A0BA-97BB-4E14-8F0F-3DDD9478FF72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0888A0BA-97BB-4E14-8F0F-3DDD9478FF72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0888A0BA-97BB-4E14-8F0F-3DDD9478FF72}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
