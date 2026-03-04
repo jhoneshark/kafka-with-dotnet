@@ -14,9 +14,13 @@ public class UsersConfiguration : IEntityTypeConfiguration<Users>
         builder.Property(t => t.Phone).HasMaxLength(25);
         builder.Property(p => p.Email).HasMaxLength(150).IsRequired();
         builder.Property(t => t.CreatedAt)
-            .HasDefaultValueSql("CURRENT_TIMESTAMP");
+            .HasColumnType("datetime")
+            .HasDefaultValueSql("CURRENT_TIMESTAMP")
+            .ValueGeneratedOnAdd();
         builder.Property(t => t.UpdatedAt)
-            .HasDefaultValueSql("CURRENT_TIMESTAMP");
+            .HasColumnType("datetime")
+            .HasDefaultValueSql("CURRENT_TIMESTAMP")
+            .ValueGeneratedOnAddOrUpdate();
         
         builder.HasIndex(u => u.Email).IsUnique();
         builder.HasIndex(t => t.CprOrCnpj).IsUnique();

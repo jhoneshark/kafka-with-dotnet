@@ -10,6 +10,16 @@ public class RolesConfiguration : IEntityTypeConfiguration<Roles>
     {
         builder.HasKey(t => t.Id);
         builder.Property(p => p.Description).HasMaxLength(50).IsRequired();
+        
+        builder.Property(t => t.CreatedAt)
+            .HasColumnType("datetime")
+            .HasDefaultValueSql("CURRENT_TIMESTAMP")
+            .ValueGeneratedOnAdd();
+
+        builder.Property(t => t.UpdatedAt)
+            .HasColumnType("datetime")
+            .HasDefaultValueSql("CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+            .ValueGeneratedOnAddOrUpdate();
 
         builder.HasData(
             new Roles 
@@ -24,7 +34,7 @@ public class RolesConfiguration : IEntityTypeConfiguration<Roles>
             },
             new Roles 
             { 
-                Id = 2, 
+                Id = 3, 
                 Description = "Admin ROOT" 
             }
         );
