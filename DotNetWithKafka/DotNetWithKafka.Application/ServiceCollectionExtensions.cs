@@ -1,4 +1,6 @@
+using DotNetWithKafka.Domain.Interfaces;
 using DotNetWithKafka.Infrastructure.Config;
+using DotNetWithKafka.Infrastructure.KafkaMessaging;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -9,6 +11,7 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddServices(this IServiceCollection services)
     {
         AddDatabaseServices(services);
+        AddDependencyInjection(services);
 
         return services;
     }
@@ -29,5 +32,10 @@ public static class ServiceCollectionExtensions
             options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
         // Configuração do Dapper
+    }
+
+    private static void AddDependencyInjection(IServiceCollection services)
+    {
+        services.AddSingleton<IKafkaProducer, KafkaProducer>();
     }
 }
