@@ -33,16 +33,41 @@ public class UserRepository : IUsersRepository
 
     public async Task<Users> CreateUser(Users user)
     {
-        throw new NotImplementedException();
+        if (user is null)
+            throw new ArgumentNullException(nameof(user));
+        
+        _dbContext.Users.Add(user);
+        await _dbContext.SaveChangesAsync();
+
+        return user;
     }
 
-    public Task<Users> UpdateUser(Users user)
+    public async Task<Users> UpdateUser(Users user)
     {
-        throw new NotImplementedException();
+        if (user is null)
+            throw new ArgumentNullException(nameof(user));
+        
+        var userDb = await _dbContext.Users.FindAsync(user.Id);
+
+        if (userDb is null) return null;
+        
+        _dbContext.Entry(userDb).CurrentValues.SetValues(user);
+
+        await _dbContext.SaveChangesAsync();
+
+        return userDb;
     }
 
-    public Task<Users> DeleteUser(int id)
+    public async Task<Users> DeleteUser(int id)
     {
-        throw new NotImplementedException();
+        var user = await _dbContext.Users.FindAsync(id);
+        
+        if (user is null)
+            throw new ArgumentNullException(nameof(user));
+        
+        _dbContext.Users.Remove(user);
+        await _dbContext.SaveChangesAsync();
+
+        return user;
     }
 }

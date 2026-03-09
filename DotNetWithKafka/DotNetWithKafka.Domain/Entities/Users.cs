@@ -11,7 +11,7 @@ public class Users
     public string? PasswordHash { get; set; }
     
     public int? RoleId { get; set; }
-    public Roles Role { get; set; }
+    public Roles? Role { get; set; }
     
     public string? RefreshToken { get; set; }
     
