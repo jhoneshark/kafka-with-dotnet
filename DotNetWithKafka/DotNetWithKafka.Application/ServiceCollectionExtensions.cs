@@ -1,4 +1,6 @@
 using Asp.Versioning;
+using DotNetWithKafka.Application.Handlers;
+using DotNetWithKafka.Domain.Entities;
 using DotNetWithKafka.Domain.Interfaces;
 using DotNetWithKafka.Infrastructure.Config;
 using DotNetWithKafka.Infrastructure.KafkaMessaging;
@@ -17,6 +19,7 @@ public static class ServiceCollectionExtensions
         AddDependencyInjection(services);
         AddApiVersioningServices(services);
         AddPolicyCors(services);
+        AddKafkaExtensions(services);
 
         return services;
     }
@@ -84,5 +87,20 @@ public static class ServiceCollectionExtensions
                     .AllowAnyHeader();  // Permite Authorization, X-Requested-With, etc
             });
         });
+    }
+
+    private static void AddKafkaExtensions(IServiceCollection services)
+    {
+        string bootstrapServers = "localhost:9092,localhost:9093,localhost:9094";
+        
+        services.AddScoped<IKafkaHandler<Users>, NewUserHandler>();
+        services.AddHostedService(sp => 
+            new KafkaConsumer<Users>(bootstrapServers, "novo-user", "user-group", sp));
+        
+        // --- CONSUMIDOR DE LOGS (Outro Modelo e Outro Tópico) --- Exemplo  
+        // string bootstrapServers = "localhost:9092"; apenas 1 brocker
+        // services.AddScoped<IKafkaHandler<LogSystem>, LogSystemHandler>();
+        // services.AddHostedService(sp => 
+        //     new KafkaConsumer<LogSystem>("system-logs", "log-group", sp));
     }
 }
