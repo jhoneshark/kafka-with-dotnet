@@ -11,6 +11,7 @@ public class AppDbContext : DbContext
     
     public DbSet<Roles> Roles { get; set; }
     public DbSet<Users> Users { get; set; }
+    public DbSet<UserDetails> UserDetails { get; set; }
     
     protected override void OnModelCreating(ModelBuilder builder)
     {
