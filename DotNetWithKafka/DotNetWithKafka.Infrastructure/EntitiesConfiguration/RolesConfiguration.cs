@@ -4,22 +4,12 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DotNetWithKafka.Infrastructure.EntitiesConfiguration;
 
-public class RolesConfiguration : IEntityTypeConfiguration<Roles>
+public class RolesConfiguration : BaseEntityConfiguration<Roles>
 {
     public void Configure(EntityTypeBuilder<Roles> builder)
     {
-        builder.HasKey(t => t.Id);
+        base.Configure(builder);
         builder.Property(p => p.Description).HasMaxLength(50).IsRequired();
-        
-        builder.Property(t => t.CreatedAt)
-            .HasColumnType("datetime")
-            .HasDefaultValueSql("CURRENT_TIMESTAMP")
-            .ValueGeneratedOnAdd();
-
-        builder.Property(t => t.UpdatedAt)
-            .HasColumnType("datetime")
-            .HasDefaultValueSql("CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
-            .ValueGeneratedOnAddOrUpdate();
 
         builder.HasData(
             new Roles 

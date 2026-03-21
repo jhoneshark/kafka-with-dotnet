@@ -4,23 +4,15 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DotNetWithKafka.Infrastructure.EntitiesConfiguration;
 
-public class UsersConfiguration : IEntityTypeConfiguration<Users>
+public class UsersConfiguration : BaseEntityConfiguration<Users>
 {
     public void Configure(EntityTypeBuilder<Users> builder)
     {
-        builder.HasKey(t => t.Id);
+        base.Configure(builder);
         builder.Property(t => t.CprOrCnpj).HasMaxLength(14).IsRequired();
         builder.Property(t => t.Name).HasMaxLength(100).IsRequired();
         builder.Property(t => t.Phone).HasMaxLength(25);
         builder.Property(p => p.Email).HasMaxLength(150).IsRequired();
-        builder.Property(t => t.CreatedAt)
-            .HasColumnType("datetime")
-            .HasDefaultValueSql("CURRENT_TIMESTAMP")
-            .ValueGeneratedOnAdd();
-        builder.Property(t => t.UpdatedAt)
-            .HasColumnType("datetime")
-            .HasDefaultValueSql("CURRENT_TIMESTAMP")
-            .ValueGeneratedOnAddOrUpdate();
         
         builder.HasIndex(u => u.Email).IsUnique();
         builder.HasIndex(t => t.CprOrCnpj).IsUnique();

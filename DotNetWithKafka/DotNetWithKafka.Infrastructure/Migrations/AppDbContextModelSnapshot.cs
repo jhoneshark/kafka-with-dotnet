@@ -36,86 +36,51 @@ namespace DotNetWithKafka.Infrastructure.Migrations
                         .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
                     b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("longtext");
 
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP");
+                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
                     MySqlPropertyBuilderExtensions.UseMySqlComputedColumn(b.Property<DateTime>("UpdatedAt"));
 
                     b.HasKey("Id");
 
                     b.ToTable("Roles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Users",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Admin",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Admin ROOT",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        });
                 });
 
             modelBuilder.Entity("DotNetWithKafka.Domain.Entities.UserDetails", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnOrder(0);
+                        .HasColumnType("int");
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateOnly?>("Birthday")
-                        .HasColumnType("date")
-                        .HasColumnOrder(2);
+                        .HasColumnType("date");
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
-                        .HasColumnOrder(98)
                         .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
                     b.Property<string>("NickName")
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)")
-                        .HasColumnOrder(4);
+                        .HasColumnType("longtext");
 
                     b.Property<string>("SocialName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)")
-                        .HasColumnOrder(3);
+                        .HasColumnType("longtext");
 
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime")
-                        .HasColumnOrder(99)
                         .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
                     MySqlPropertyBuilderExtensions.UseMySqlComputedColumn(b.Property<DateTime>("UpdatedAt"));
 
                     b.Property<int>("UserId")
-                        .HasColumnType("int")
-                        .HasColumnOrder(1);
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -133,9 +98,7 @@ namespace DotNetWithKafka.Infrastructure.Migrations
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CprOrCnpj")
-                        .IsRequired()
-                        .HasMaxLength(14)
-                        .HasColumnType("varchar(14)");
+                        .HasColumnType("longtext");
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
@@ -143,21 +106,16 @@ namespace DotNetWithKafka.Infrastructure.Migrations
                         .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
                     b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("varchar(150)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("longtext");
 
                     b.Property<string>("Phone")
-                        .HasMaxLength(25)
-                        .HasColumnType("varchar(25)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("RefreshToken")
                         .HasColumnType("longtext");
@@ -166,9 +124,6 @@ namespace DotNetWithKafka.Infrastructure.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.Property<int?>("RoleId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("RolesId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("UpdatedAt")
@@ -180,15 +135,7 @@ namespace DotNetWithKafka.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CprOrCnpj")
-                        .IsUnique();
-
-                    b.HasIndex("Email")
-                        .IsUnique();
-
                     b.HasIndex("RoleId");
-
-                    b.HasIndex("RolesId");
 
                     b.ToTable("Users");
                 });
@@ -207,13 +154,8 @@ namespace DotNetWithKafka.Infrastructure.Migrations
             modelBuilder.Entity("DotNetWithKafka.Domain.Entities.Users", b =>
                 {
                     b.HasOne("DotNetWithKafka.Domain.Entities.Roles", "Role")
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("DotNetWithKafka.Domain.Entities.Roles", null)
                         .WithMany("Users")
-                        .HasForeignKey("RolesId");
+                        .HasForeignKey("RoleId");
 
                     b.Navigation("Role");
                 });

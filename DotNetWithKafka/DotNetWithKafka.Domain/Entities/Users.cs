@@ -1,8 +1,7 @@
 namespace DotNetWithKafka.Domain.Entities;
 
-public class Users
+public class Users : BaseEntity
 {
-    public int Id { get; set; }
     public string? CprOrCnpj { get; set; }
     public string? Name { get; set; }
     public string? Phone { get; set; }
@@ -16,8 +15,4 @@ public class Users
     public string? RefreshToken { get; set; }
     
     public DateTime? RefreshTokenExpiryTime { get; set; }
-    
-    public DateTime CreatedAt { get; set; }
-    
-    public DateTime UpdatedAt { get; set; }
 }
